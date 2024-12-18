@@ -4,7 +4,7 @@ const { createClient } = require('redis');
 const Queue = require('bull');
 
 const client = createClient({
-  url: 'redis://127.0.0.1:6379',
+  url: 'REDIS_URL',
 });
 
 let emailQueue;
