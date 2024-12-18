@@ -2,9 +2,10 @@
 
 const { createClient } = require('redis');
 const Queue = require('bull');
+require('dotenv').config();
 
 const client = createClient({
-  url: 'REDIS_URL',
+  url: process.env.REDIS_URL,
 });
 
 let emailQueue;
@@ -43,8 +44,7 @@ async function initializeRedis() {
     // Khởi tạo queue email
     emailQueue = new Queue('email notifications', {
       redis: {
-        host: '127.0.0.1',
-        port: 6379,
+        url: process.env.REDIS_URL,
       },
     });
 
