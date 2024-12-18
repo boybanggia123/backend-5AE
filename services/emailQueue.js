@@ -1,12 +1,13 @@
 // emailQueue.js
-
+require('dotenv').config();
 const { createClient } = require('redis');
 const Queue = require('bull');
-require('dotenv').config();
 
 const client = createClient({
   url: process.env.REDIS_URL,
 });
+
+console.log('REDIS_URL:', process.env.REDIS_URL);
 
 let emailQueue;
 let redisInitialized = false;
