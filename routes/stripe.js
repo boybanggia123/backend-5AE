@@ -232,6 +232,21 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
   if (eventType === "checkout.session.completed") {
     try {
       const customer = await stripe.customers.retrieve(data.customer);
+
+      if (data.customer) {
+        try {
+          const customer = await stripe.customers.retrieve(data.customer);
+          console.log('Customer retrieved:', customer);
+          
+        } catch (err) {
+          console.error('Error retrieving customer:', err.message);
+          return res.status(400).send(`Error retrieving customer: ${err.message}`);
+        }
+      } else {
+        console.error('Customer is missing or invalid');
+        return res.status(400).send('Customer is missing or invalid');
+      }
+      
   
       // Lấy thông tin giảm giá từ metadata
       const discount = customer.metadata.discount || [];

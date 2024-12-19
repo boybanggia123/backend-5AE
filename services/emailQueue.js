@@ -13,7 +13,7 @@ let emailQueue;
 let redisInitialized = false;
 let isInitializing = false;
 
-async function connectWithRetry(retries = 5, delay = 1000) {
+async function connectWithRetry(retries = 10, delay = 5000) {
   for (let i = 0; i < retries; i++) {
     try {
       await client.connect();
