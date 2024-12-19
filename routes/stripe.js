@@ -96,12 +96,6 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
   
-  
-  
-  
-  
-  
-  
   const session = await stripe.checkout.sessions.create({
     shipping_address_collection: {
       allowed_countries: ["US", "VN"],
@@ -212,7 +206,7 @@ const createBill = async (customer, data) => {
 
 
 let endpointSecret ;
-//  endpointSecret = "whsec_2012e3ef93473c4aff8dd580bc089e5cb45645845400148bed33242726171cf3";
+  endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
